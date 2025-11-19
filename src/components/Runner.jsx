@@ -94,7 +94,7 @@ export default function Runner() {
         {result && (
           <div className="mt-8 bg-slate-800/60 border border-blue-500/20 rounded-2xl p-6 text-blue-100">
             <h3 className="text-xl font-semibold text-white mb-3">Result</h3>
-            <div className="space-y-2 text-sm">
+            <div className="space-y-4 text-sm">
               {result.trend && (
                 <div>
                   <div className="text-blue-300">Trend Pick</div>
@@ -107,6 +107,19 @@ export default function Runner() {
                   <pre className="whitespace-pre-wrap text-blue-100/80 mt-2">{result.script}</pre>
                 </details>
               )}
+
+              {/* Voiceover Section */}
+              {result.voiceover_url && (
+                <div>
+                  <div className="text-blue-300 mb-2">Voiceover</div>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                    <audio controls src={result.voiceover_url} className="w-full sm:max-w-md" />
+                    <a className="text-blue-400 hover:underline" href={result.voiceover_url} target="_blank" rel="noreferrer">Open link</a>
+                  </div>
+                </div>
+              )}
+
+              {/* B‑roll links */}
               {Array.isArray(result.broll_urls) && result.broll_urls.length > 0 && (
                 <div>
                   <div className="text-blue-300 mb-1">B‑roll</div>
@@ -117,16 +130,15 @@ export default function Runner() {
                   </ul>
                 </div>
               )}
-              {result.voiceover_url && (
-                <div>
-                  <div className="text-blue-300">Voiceover</div>
-                  <a className="text-blue-400 hover:underline" href={result.voiceover_url} target="_blank" rel="noreferrer">{result.voiceover_url}</a>
-                </div>
-              )}
+
+              {/* Final Video Section */}
               {result.final_url && (
                 <div>
-                  <div className="text-blue-300">Final MP4</div>
-                  <a className="text-blue-400 hover:underline" href={result.final_url} target="_blank" rel="noreferrer">{result.final_url}</a>
+                  <div className="text-blue-300 mb-2">Final MP4</div>
+                  <div className="space-y-2">
+                    <video controls className="w-full rounded-lg border border-blue-500/20 bg-black" src={result.final_url} />
+                    <a className="text-blue-400 hover:underline" href={result.final_url} target="_blank" rel="noreferrer">Open link</a>
+                  </div>
                 </div>
               )}
             </div>
